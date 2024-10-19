@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="w-full">
+    <div class="w-full h-screen relative bg-black overflow-hidden ">
+      <nav class="w-full h-[15vh] px-10 flex justify-between fixed items-center">
+        <img class="h-[15vh] contrast-150 brightness-110"
+          src="https://i.redd.it/3d-rendered-the-cyberpunk-logo-using-blender-v0-khopj82wqee91.png?width=1920&format=png&auto=webp&s=f42dbd8f5c04aedb9ba9291c1ba4d679029cc1f3"
+          alt="">
+
+        <div class="flex space-x-6 text-white opacity-70 text-base font-['Orbitron'] uppercase tracking-wider">
+          <a href="https://www.twitch.tv"
+            class="relative overflow-hidden group hover:text-cyan-400 transition-colors duration-300 text-shadow-glow">
+            <span class="relative z-10">Twitch</span>
+            <span class="absolute left-0 bottom-0 w-full h-0.5 bg-cyan-400 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+          </a>
+          <a href="https://store.steampowered.com"
+            class="relative overflow-hidden group hover:text-cyan-400 transition-colors duration-300 text-shadow-glow">
+            <span class="relative z-10">Steam</span>
+            <span class="absolute left-0 bottom-0 w-full h-0.5 bg-cyan-400 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+          </a>
+          <a href="https://www.epicgames.com"
+            class="relative overflow-hidden group hover:text-cyan-400 transition-colors duration-300 text-shadow-glow">
+            <span class="relative z-10">Epic Games</span>
+            <span class="absolute left-0 bottom-0 w-full h-0.5 bg-cyan-400 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+          </a>
+          <a href="https://www.gog.com"
+            class="relative overflow-hidden group hover:text-cyan-400 transition-colors duration-300 text-shadow-glow">
+            <span class="relative z-10">GOG</span>
+            <span class="absolute left-0 bottom-0 w-full h-0.5 bg-cyan-400 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+          </a>
+          <a href="https://www.ign.com"
+            class="relative overflow-hidden group hover:text-cyan-400 transition-colors duration-300 text-shadow-glow">
+            <span class="relative z-10">IGN</span>
+            <span class="absolute left-0 bottom-0 w-full h-0.5 bg-cyan-400 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+          </a>
+        </div>
+      </nav>
+      <div
+        class="w-full mix-blend-screen h-screen top-1/2 left-1/2 translate-x-[-50%] translate-y-[-40%] absolute flex justify-center items-center">
+        <img class="h-[100vh] contrast-150 brightness-110"
+          src="https://i.redd.it/3d-rendered-the-cyberpunk-logo-using-blender-v0-khopj82wqee91.png?width=1920&format=png&auto=webp&s=f42dbd8f5c04aedb9ba9291c1ba4d679029cc1f3"
+          alt="">
+      </div>
+      <div class="absolute pointer-events-none h-full w-full text-center flex items-end justify-end p-10">
+        <h1 class="text-xl font-['Orbitron'] uppercase tracking-wider text-white bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-pulse shadow-lg shadow-cyan-500/50">
+          <span class="relative p-1">
+            just for fun
+            <span class="absolute inset-0 blur-sm bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 opacity-50"></span>
+          </span>
+        </h1>
+      </div>
+      
+      <canvas id="canvas"></canvas>
+      
+
+    </div>
+  </div>
+
+
+
+  <script type="module" src="./main.js"></script>
+</body>
+
+</html>
