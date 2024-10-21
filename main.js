@@ -20,15 +20,13 @@ const rgbeLoader = new RGBELoader()
 // Load HDRI environment map
 rgbeLoader.load('https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/moonless_golf_1k.hdr', (texture) => {
   texture.mapping = THREE.EquirectangularReflectionMapping
-
   scene.environment = texture
-  
 })
 
 loader.load(
   './DamagedHelmet.gltf',
   (gltf) => {
-    model= gltf.scene
+    model = gltf.scene
     scene.add(model)
   },
   (progress) => {
@@ -45,13 +43,15 @@ const renderer = new THREE.WebGLRenderer({
   alpha: true
 })
 
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setSize(window.innerWidth, window.innerHeight)
+function setRendererSize() {
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  renderer.setSize(window.innerWidth, window.innerHeight)
+}
+
+setRendererSize()
 renderer.toneMapping = THREE.ACESFilmicToneMapping
 renderer.toneMappingExposure = 1
 renderer.outputEncoding = THREE.sRGBEncoding
-
-
 
 // Post-processing setup
 const composer = new EffectComposer(renderer)
@@ -62,10 +62,10 @@ const rgbShiftPass = new ShaderPass(RGBShiftShader)
 rgbShiftPass.uniforms['amount'].value = 0.0005
 composer.addPass(rgbShiftPass)
 
-window.addEventListener("mousemove" , (e)=>{
-  if(model){
-    const rotationY= (e.clientX / window.innerWidth - 0.5)*(Math.PI*0.3)
-    const rotationX= (e.clientY / window.innerHeight - 0.5)*(Math.PI*0.3)
+function handleMouseMove(e) {
+  if (model) {
+    const rotationY = (e.clientX / window.innerWidth - 0.5) * (Math.PI * 0.3)
+    const rotationX = (e.clientY / window.innerHeight - 0.5) * (Math.PI * 0.3)
     gsap.to(model.rotation, {
       x: rotationX,
       y: rotationY,
@@ -73,29 +73,37 @@ window.addEventListener("mousemove" , (e)=>{
       ease: "power2.out"
     });
   }
-})
+}
 
-window.addEventListener("resize" , ()=>{
+function handleTouchMove(e) {
+  if (model && e.touches.length === 1) {
+    const touch = e.touches[0]
+    const rotationY = (touch.clientX / window.innerWidth - 0.5) * (Math.PI * 0.3)
+    const rotationX = (touch.clientY / window.innerHeight - 0.5) * (Math.PI * 0.3)
+    gsap.to(model.rotation, {
+      x: rotationX,
+      y: rotationY,
+      duration: 0.8,
+      ease: "power2.out"
+    });
+  }
+}
+
+window.addEventListener("mousemove", handleMouseMove)
+window.addEventListener("touchmove", handleTouchMove)
+
+function handleResize() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth, window.innerHeight)
+  setRendererSize()
   composer.setSize(window.innerWidth, window.innerHeight)
-}) 
+}
+
+window.addEventListener("resize", handleResize)
 
 function animate() {
   requestAnimationFrame(animate)
-  
- 
-  // Render using the composer instead of the renderer
   composer.render()
 }
 
 animate()
-
-// Handle window resize
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight
-  camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth, window.innerHeight)
-  composer.setSize(window.innerWidth, window.innerHeight)
-})
